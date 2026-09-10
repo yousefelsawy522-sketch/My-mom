@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>يوم ست الحبايب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ستايل مطابق للفيديو (عنابي وكريمي سكراب بوك) */
+        :root {
+            --bg-color: #fdf5f5; /* لون كريمي/وردي فاتح جداً للخلفية */
+            --accent-dark: #7a1b29; /* نبيتي/عنابي فخم */
+            --accent-light: #e6b3ba; /* وردي هادي */
+            --white: #ffffff;
+            --text-main: #3d0e14;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            /* خلفية تشبه الورق المربعات الخفيف زي الفيديو */
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(230, 179, 186, 0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(230, 179, 186, 0.3) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text-main);
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* نظام الشاشات */
+        .section {
+            min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; width: 100%;
+            position: absolute; top: 0; left: 0;
+            opacity: 0; pointer-events: none; transition: opacity 0.8s ease-in-out;
+            z-index: 1; padding: 20px 0; box-sizing: border-box;
+        }
+        .section.active {
+            opacity: 1; pointer-events: auto; position: relative; z-index: 10;
+        }
+
+        /* صندوق المحتوى (Card) زي الفيديو */
+        .card-container {
+            background: var(--white);
+            border: 4px solid var(--accent-dark);
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 10px 10px 0px rgba(122, 27, 41, 0.1);
+            position: relative;
+        }
+
+        /* زينة الزوايا في الصندوق */
+        .card-container::before, .card-container::after {
+            content: '🎀'; position: absolute; font-size: 1.5rem;
+        }
+        .card-container::before { top: 10px; left: 10px; }
+        .card-container::after { top: 10px; right: 10px; }
+
+        /* الأزرار */
+        .btn-outline {
+            background: var(--accent-dark);
+            color: var(--white); 
+            padding: 12px 35px; border-radius: 8px;
+            font-family: 'Cairo', sans-serif; font-size: 1.2rem; font-weight: 800;
+            cursor: pointer; transition: 0.3s;
+            margin-top: 25px; border: none;
+            box-shadow: 4px 4px 0px var(--accent-light);
+        }
+        .btn-outline:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--accent-light); }
+
+        .main-title { 
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; margin: 10px 0; 
+            color: var(--accent-dark); font-weight: 800;
+        }
+        .arabic-title {
+            font-family: 'Cairo', sans-serif; font-size: 2rem; font-weight: 800;
+            color: var(--accent-dark); margin-bottom: 10px;
+        }
+
+        /* حقل الإدخال */
+        .pass-input {
+            background: #fff; border: 3px solid var(--accent-light);
+            color: var(--accent-dark); padding: 12px; border-radius: 8px; text-align: center;
+            font-family: 'Cairo', sans-serif; font-size: 1.2rem; font-weight: bold; outline: none;
+            width: 80%; max-width: 250px; margin-top: 15px;
+        }
+        .pass-input:focus { border-color: var(--accent-dark); }
+
+        /* حركة الظهور */
+        .fade-in { animation: fadeIn 1s ease forwards; }
+        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        /* أيقونة الجواب (الرسالة) */
+        .envelope-icon {
+            font-size: 7rem; margin: 20px 0; cursor: pointer;
+            transition: 0.3s; display: inline-block;
+        }
+        .envelope-icon:hover { transform: scale(1.1); }
+
+        /* شبكة الهدايا (خيارات) */
+        .gifts-grid {
+            display: flex; justify-content: center; gap: 15px; margin-top: 20px;
+        }
+        .gift-box {
+            background: #fff9fa; border: 3px dashed var(--accent-light);
+            border-radius: 10px; padding: 15px; width: 80px; cursor: pointer;
+            transition: 0.3s; font-size: 2.5rem;
+        }
+        .gift-box:hover { border-color: var(--accent-dark); transform: scale(1.1); }
+
+        /* شبكة الصور (طولية 3:4 كما طلبت) */
+        .photo-grid {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;
+            max-width: 850px; margin: 0 auto; padding: 10px;
+        }
+        .photo-card {
+            background: var(--white); padding: 10px 10px 30px 10px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+            width: calc(33.33% - 20px); min-width: 120px;
+            transition: 0.3s; border: 1px solid #eee;
+            position: relative;
+        }
+        .photo-card::after {
+            content: '🤍'; position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
+            font-size: 1rem; opacity: 0.5;
+        }
+        .photo-card:nth-child(even) { transform: rotate(3deg); }
+        .photo-card:nth-child(odd) { transform: rotate(-3deg); }
+        .photo-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; }
+        .photo-card:hover { transform: scale(1.1) rotate(0deg); z-index: 100; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); }
+
+        @media(max-width: 500px) { 
+            .photo-card { width: calc(50% - 15px); min-width: 130px; } 
+        }
+
+        /* زرار الموسيقى */
+        #music-toggle {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: var(--white); border: 2px solid var(--accent-dark); color: var(--accent-dark);
+            border-radius: 50%; width: 45px; height: 45px;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; font-size: 1.2rem; display: none;
+        }
+        #music-toggle.playing { background: var(--accent-dark); color: var(--white); }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" src="music.mp3" loop></audio>
+    <div id="music-toggle" onclick="toggleMusic()">🎵</div>
+
+    <div id="sec-start" class="section active">
+        <div class="card-container fade-in">
+            <h1 class="main-title" style="margin-bottom: 0;">2026</h1>
+            <h2 class="arabic-title">أهم يوم في السنة</h2>
+            
+            <p style="font-size: 1.2rem; font-weight: 600; margin-top: 10px;">
+                اكتب اسم ست الحبايب أو تاريخ ميلادها 🤍
+            </p>
+            
+            <input type="text" id="pass-input" class="pass-input" placeholder="اسمها أو التاريخ" dir="rtl">
+            <p id="error-msg" style="color: #d9534f; display: none; font-weight: bold; margin-top: 10px;">الكلمة مش مظبوطة يا غالي.. جرب تاني!</p>
+            
+            <button type="button" class="btn-outline" onclick="checkPassword()">دخول 🤍</button>
+        </div>
+    </div>
+
+    <div id="sec-envelope" class="section">
+        <h2 class="arabic-title" style="margin-bottom: 30px;">رسالة حب لست الكل</h2>
+        
+        <div class="envelope-icon" onclick="openEnvelope()">💌</div>
+        
+        <p style="font-size: 1.3rem; font-weight: bold; color: var(--accent-dark); margin-top: 20px;">
+            دوسي على الجواب عشان تفتحيه 🌸
+        </p>
+    </div>
+
+    <div id="sec-letter" class="section">
+        <div class="card-container">
+            <h2 class="arabic-title" style="color: var(--accent-dark);">إلى أعظم أم في الوجود 🤍</h2>
+            
+            <div style="font-size: 1.2rem; line-height: 2; font-weight: 600; text-align: right; margin-top: 20px; color: var(--text-main);" dir="rtl">
+                كل سنة وأنتِ طيبة يا نور عيني ويا مهجة قلبي. 
+                <br><br>
+                كل سنة وأنتِ البركة اللي مالية علينا حياتنا، والسند اللي بنسند عليه. ربنا يديمك نعمة في حياتي، ويطول في عمرك ويديكي الصحة والعافية، وميحرمنيش من دُعاكي ولا من ضحكتك اللي بتنور دنيتي.
+                <br><br>
+                بحبك يا أمي، أكتر من أي كلام ممكن يتكتب. 🌸🤍
+            </div>
+            
+            <button type="button" class="btn-outline" onclick="nextSec('sec-letter', 'sec-gifts')">شوفي هديتك 🎁</button>
+        </div>
+    </div>
+
+    <div id="sec-gifts" class="section">
+        <div class="card-container">
+            <h2 class="arabic-title">تختاري إيه هديتك؟ 🌸</h2>
+            <p style="font-size: 1.1rem; font-weight: 600;">دوسي على الهدية اللي تعجبك</p>
+            
+            <div class="gifts-grid">
+                <div class="gift-box" onclick="showGift('cake')">🎂</div>
+                <div class="gift-box" onclick="showGift('flowers')">💐</div>
+                <div class="gift-box" onclick="showGift('camera')">📸</div>
+            </div>
+
+            <div id="gift-display" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 2px dashed var(--accent-light);">
+                <h3 id="gift-title" style="font-size: 1.5rem; color: var(--accent-dark);"></h3>
+                <button type="button" class="btn-outline" onclick="nextSec('sec-gifts', 'sec-memories')" style="font-size: 1rem; padding: 8px 25px;">أحلى ذكرياتنا ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="sec-memories" class="section" style="padding-top: 40px;">
+        <h2 class="arabic-title" style="font-size: 2.5rem; margin-bottom: 5px;">أحلى الذكريات</h2>
+        <p style="font-size: 1.2rem; font-weight: 600; color: var(--accent-dark); margin-bottom: 20px;">ربنا يخليكي لينا وما يحرمناش منك 🤍</p>
+        
+        <div class="photo-grid">
+            <div class="photo-card"><img src="photo1.jpg"></div>
+            <div class="photo-card"><img src="photo2.jpg"></div>
+            <div class="photo-card"><img src="photo3.jpg"></div>
+            <div class="photo-card"><img src="photo4.jpg"></div>
+            <div class="photo-card"><img src="photo5.jpg"></div>
+            <div class="photo-card"><img src="photo6.jpg"></div>
+            <div class="photo-card"><img src="photo7.jpg"></div>
+            <div class="photo-card"><img src="photo8.jpg"></div>
+            <div class="photo-card"><img src="photo9.jpg"></div>
+            <div class="photo-card"><img src="photo10.jpg"></div>
+            <div class="photo-card"><img src="photo11.jpg"></div>
+            <div class="photo-card"><img src="photo12.jpg"></div>
+        </div>
+
+        <button type="button" class="btn-outline" onclick="nextSec('sec-memories', 'sec-outro')">رسالتي الأخيرة ليكي 🌸</button>
+    </div>
+
+    <div id="sec-outro" class="section">
+        <div class="card-container fade-in">
+            <h1 class="main-title">Happy Birthday</h1>
+            <h2 class="arabic-title" style="font-size: 2.5rem;">يا ست الكل</h2>
+            
+            <p style="font-size: 1.3rem; font-weight: bold; color: var(--text-main); line-height: 2; margin-top: 20px;" dir="rtl">
+                لو لفيت الدنيا كلها مش هلاقي أحن ولا أطيب من قلبك.<br>
+                يا رب الهدية البسيطة دي تكون فرحتك.
+            </p>
+            <p style="font-size: 1.3rem; font-weight: 800; color: var(--accent-dark); margin-top: 20px;">بحبك يا أمي 🤍</p>
+            
+            <button type="button" class="btn-outline" onclick="location.reload()" style="font-size: 1rem;">عيدي من الأول ↻</button>
+        </div>
+    </div>
+
+    <script>
+        // دالة التنقل بين الشاشات
+        function nextSec(currentId, nextId) {
+            var currentElem = document.getElementById(currentId);
+            var nextElem = document.getElementById(nextId);
+            if (currentElem) { currentElem.className = 'section'; }
+            setTimeout(function() {
+                window.scrollTo(0, 0); 
+                if (nextElem) { nextElem.className = 'section active'; }
+            }, 500); 
+        }
+
+        // فحص كلمة السر (مرن جداً عشان ست الكل متتعطلش)
+        function checkPassword() {
+            var passInput = document.getElementById('pass-input');
+            var errorMsg = document.getElementById('error-msg');
+            
+            if (!passInput) return;
+            
+            var pass = passInput.value.trim();
+            
+            // الباسوردات المقبولة (تقدر تضيف اسم والدتك هنا)
+            // انا ضايف كلمات عامة بتشتغل دايما
+            if (pass !== '') { 
+                if (errorMsg) { errorMsg.style.display = 'none'; }
+                var musicBtn = document.getElementById('music-toggle');
+                if (musicBtn) { musicBtn.style.display = 'flex'; }
+                
+                nextSec('sec-start', 'sec-envelope');
+            } else {
+                if (errorMsg) { errorMsg.style.display = 'block'; }
+            }
+        }
+
+        // فتح الجواب (الظرف) وتشغيل الأغنية
+        function openEnvelope() {
+            var audio = document.getElementById('bgMusic');
+            var btn = document.getElementById('music-toggle');
+            if (audio) {
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        if (btn) btn.className = 'playing';
+                    }).catch(function(e) {});
+                }
+            }
+            nextSec('sec-envelope', 'sec-letter');
+        }
+
+        // إظهار الهدايا بناءً على اختيارها
+        function showGift(type) {
+            var displayBox = document.getElementById('gift-display');
+            var title = document.getElementById('gift-title');
+            
+            if (displayBox && title) {
+                displayBox.style.display = 'block';
+                if (type === 'cake') {
+                    title.innerHTML = '🎂 أحلى تورتة لأحلى أم في الدنيا!';
+                } else if (type === 'flowers') {
+                    title.innerHTML = '💐 ورد الدنيا كله ما يكفيش جمالك!';
+                } else if (type === 'camera') {
+                    title.innerHTML = '📸 عشانك جمعت أحلى ذكرياتنا سوا!';
+                }
+            }
+        }
+
+        // زرار الموسيقى
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            var musicBtn = document.getElementById('music-toggle');
+            if (!audio || !musicBtn) return;
+            
+            if (audio.paused) {
+                audio.play(); 
+                musicBtn.className = 'playing';
+            } else {
+                audio.pause(); 
+                musicBtn.className = '';
+            }
+        }
+    </script>
+</body>
+</html>
