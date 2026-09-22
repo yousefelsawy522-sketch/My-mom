@@ -144,18 +144,21 @@
             <div class="pin-dot" id="dot-4"></div>
         </div>
 
-        <div class="keypad">
-            <div class="key" onclick="pressKey()">1</div>
-            <div class="key" onclick="pressKey()">2</div>
-            <div class="key" onclick="pressKey()">3</div>
-            <div class="key" onclick="pressKey()">4</div>
-            <div class="key" onclick="pressKey()">5</div>
-            <div class="key" onclick="pressKey()">6</div>
-            <div class="key" onclick="pressKey()">7</div>
-            <div class="key" onclick="pressKey()">8</div>
-            <div class="key" onclick="pressKey()">9</div>
-            <div class="key key-bottom" onclick="pressKey()">0</div>
-        </div>
+       <div class="keypad">
+    <div class="key" onclick="pressKey('1')">1</div>
+    <div class="key" onclick="pressKey('2')">2</div>
+    <div class="key" onclick="pressKey('3')">3</div>
+    <div class="key" onclick="pressKey('4')">4</div>
+    <div class="key" onclick="pressKey('5')">5</div>
+    <div class="key" onclick="pressKey('6')">6</div>
+    <div class="key" onclick="pressKey('7')">7</div>
+    <div class="key" onclick="pressKey('8')">8</div>
+    <div class="key" onclick="pressKey('9')">9</div>
+    <div class="key key-bottom" onclick="pressKey('0')">0</div>
+</div>
+
+<!-- حط السطر ده تحتهم مباشرة عشان تظهر رسالة لو الرقم غلط -->
+<p id="pin-error" style="color: #d9534f; font-weight: bold; margin-top: 20px; opacity: 0; transition: 0.3s; font-size: 1.1rem;">الرقم غلط.. جربي تاني يا ست الكل!</p>
         <p style="margin-top: 30px; color: #888; font-size: 0.9rem;">سنة ميلاد القمر </p>
     </div>
 
@@ -268,13 +271,55 @@
             star.style.animationDelay = Math.random() * 5 + 's';
             if (starsContainer) { starsContainer.appendChild(star); }
         }
-        // ================= برمجة الباسورد =================
-        let pinCount = 0;
-        function pressKey(1982) {
-            if (pinCount < 4) {
-                pinCount++;
-                document.getElementById('dot-' + pinCount).classList.add('filled');
-                
+       // ================= برمجة الباسورد (1982) =================
+let pinCount = 0;
+let currentPin = "";
+
+function pressKey(num) {
+    let errorMsg = document.getElementById('pin-error');
+    
+    // إخفاء رسالة الخطأ لو بدأت تكتب من جديد
+    if (pinCount === 0 && errorMsg) {
+        errorMsg.style.opacity = '0';
+    }
+
+    if (pinCount < 4) {
+        pinCount++;
+        currentPin += num;
+        let dot = document.getElementById('dot-' + pinCount);
+        if (dot) dot.classList.add('filled');
+        
+        // تشغيل الأغنية من أول ضغطة
+        let audio = document.getElementById('bgMusic');
+        if (audio && audio.paused) {
+            audio.play().catch(e => console.log('Audio init'));
+        }
+
+        // لما تكتب 4 أرقام نفحصهم
+        if (pinCount === 4) {
+            if (currentPin === "1982") {
+                // لو صح يفتح
+                setTimeout(unlockSequence, 500);
+            } else {
+                // لو غلط يظهر الرسالة ويفضي النقط
+                setTimeout(() => {
+                    if (errorMsg) errorMsg.style.opacity = '1';
+                    resetKeypad();
+                }, 400);
+            }
+        }
+    }
+}
+
+// تفريغ النقط لو الباسورد كان غلط
+function resetKeypad() {
+    pinCount = 0;
+    currentPin = "";
+    document.getElementById('dot-1').classList.remove('filled');
+    document.getElementById('dot-2').classList.remove('filled');
+    document.getElementById('dot-3').classList.remove('filled');
+    document.getElementById('dot-4').classList.remove('filled');
+}
                 // تشغيل الأغنية من أول ضغطة
                 let audio = document.getElementById('bgMusic');
                 if (audio && audio.paused) {
