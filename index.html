@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     
     <style>
-        /* الألوان الأساسية المطابقة للفيديو */
         :root {
             --bg-light: #fffafb;
             --text-dark: #3a1c24;
@@ -25,7 +24,6 @@
             overscroll-behavior: none;
         }
 
-        /* حاويات الشاشات الثابتة (للبداية) */
         .fixed-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -52,6 +50,8 @@
         }
         .key:active { transform: scale(0.9); background: var(--envelope-bg); }
         .key-bottom { grid-column: 2; }
+        
+        #pin-error { color: #d9534f; font-weight: bold; margin-top: 20px; opacity: 0; transition: 0.3s; font-size: 1.1rem; }
 
         /* ================= 2. شاشات النصوص الافتتاحية ================= */
         .intro-text { font-size: 1.8rem; font-weight: 800; color: var(--dark-pink); text-align: center; padding: 20px; opacity: 0; transform: translateY(20px); transition: all 1s ease; }
@@ -60,18 +60,15 @@
         /* ================= 3. المحتوى الرئيسي (السكرول) ================= */
         #main-content { display: none; padding-bottom: 100px; }
         
-        /* عناصر الأنيميشن عند السكرول */
         .fade-up { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
         .fade-up.show { opacity: 1; transform: translateY(0); }
 
-        /* الهيدر */
         .header-sec { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         .main-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--dark-pink); margin: 0; }
         .main-subtitle { font-size: 2rem; color: var(--primary-pink); font-family: 'Playfair Display', serif; margin-top: -10px; }
         .scroll-indicator { margin-top: 50px; font-size: 1rem; color: #888; animation: bounce 2s infinite; letter-spacing: 2px; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
 
-        /* الأقسام (القصة، الذكريات) */
         .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--dark-pink); text-align: center; margin-top: 80px; margin-bottom: 10px; }
         .section-sub { text-align: center; font-size: 1rem; color: #777; margin-bottom: 40px; font-weight: 600; }
 
@@ -123,7 +120,6 @@
         .final-photo { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; margin: 30px auto; display: block; filter: blur(10px); transition: filter 2s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .final-photo.clear { filter: blur(0); }
 
-        /* جزيئات القلوب المتطايرة */
         .particle { position: fixed; pointer-events: none; opacity: 0; animation: floatHeart 4s linear forwards; font-size: 1.2rem; z-index: 999; }
         @keyframes floatHeart { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
     </style>
@@ -144,22 +140,21 @@
             <div class="pin-dot" id="dot-4"></div>
         </div>
 
-       <div class="keypad">
-    <div class="key" onclick="pressKey('1')">1</div>
-    <div class="key" onclick="pressKey('2')">2</div>
-    <div class="key" onclick="pressKey('3')">3</div>
-    <div class="key" onclick="pressKey('4')">4</div>
-    <div class="key" onclick="pressKey('5')">5</div>
-    <div class="key" onclick="pressKey('6')">6</div>
-    <div class="key" onclick="pressKey('7')">7</div>
-    <div class="key" onclick="pressKey('8')">8</div>
-    <div class="key" onclick="pressKey('9')">9</div>
-    <div class="key key-bottom" onclick="pressKey('0')">0</div>
-</div>
-
-<!-- حط السطر ده تحتهم مباشرة عشان تظهر رسالة لو الرقم غلط -->
-<p id="pin-error" style="color: #d9534f; font-weight: bold; margin-top: 20px; opacity: 0; transition: 0.3s; font-size: 1.1rem;">الرقم غلط.. جربي تاني يا ست الكل!</p>
-        <p style="margin-top: 30px; color: #888; font-size: 0.9rem;">سنة ميلاد القمر </p>
+        <div class="keypad">
+            <div class="key" onclick="pressKey('1')">1</div>
+            <div class="key" onclick="pressKey('2')">2</div>
+            <div class="key" onclick="pressKey('3')">3</div>
+            <div class="key" onclick="pressKey('4')">4</div>
+            <div class="key" onclick="pressKey('5')">5</div>
+            <div class="key" onclick="pressKey('6')">6</div>
+            <div class="key" onclick="pressKey('7')">7</div>
+            <div class="key" onclick="pressKey('8')">8</div>
+            <div class="key" onclick="pressKey('9')">9</div>
+            <div class="key key-bottom" onclick="pressKey('0')">0</div>
+        </div>
+        
+        <p id="pin-error">الرقم غلط.. جربي تاني يا ست الكل!</p>
+        <p style="margin-top: 10px; color: #888; font-size: 0.9rem;">اكتبي سنة ميلادك لفتح الرسالة</p>
     </div>
 
     <!-- ================= شاشة فتح القفل ================= -->
@@ -182,9 +177,9 @@
         
         <!-- الهيدر -->
         <div class="header-sec fade-up">
-            <h1 class="main-title">Happy Birthday❤🎉</h1>
-            <h2 class="main-subtitle">امي</h2>
-            <div class="scroll-indicator">❤انزلي تحت شوفي المفاجاة❤<br>↓</div>
+            <h1 class="main-title">Happy Birthday,</h1>
+            <h2 class="main-subtitle">Mom.</h2>
+            <div class="scroll-indicator">SCROLL TO BEGIN<br>↓</div>
         </div>
 
         <!-- قسم الذكريات -->
@@ -197,11 +192,11 @@
             <div class="story-text fade-up">كل يوم بيمر عليا وأنا بشوفك بخير هو أجمل يوم في حياتي 🤍</div>
 
             <img src="photo3.jpg" class="story-photo fade-up">
-             <img src="photo4.jpg" class="story-photo fade-up">
+                        <img src="photo4.jpg" class="story-photo fade-up">
             <div class="story-text fade-up">ربنا يخليكي لينا يا ست الكل وما يحرمناش من ضحكتك أبداً</div>
 
             <img src="photo5.jpg" class="story-photo fade-up">
-             <img src="photo6.jpg" class="story-photo fade-up">
+                        <img src="photo6.jpg" class="story-photo fade-up">
             <div class="story-text fade-up">مهما كبرت هفضل محتاج حضنك ودعواتك اللي ممشياني في الدنيا</div>
         </div>
 
@@ -258,56 +253,23 @@
     </div>
 
     <script>
-       
-       // ================= برمجة الباسورد (1982) =================
-let pinCount = 0;
-let currentPin = "";
+        // ================= برمجة الباسورد (1982) =================
+        let pinCount = 0;
+        let currentPin = "";
 
-function pressKey(num) {
-    let errorMsg = document.getElementById('pin-error');
-    
-    // إخفاء رسالة الخطأ لو بدأت تكتب من جديد
-    if (pinCount === 0 && errorMsg) {
-        errorMsg.style.opacity = '0';
-    }
-
-    if (pinCount < 4) {
-        pinCount++;
-        currentPin += num;
-        let dot = document.getElementById('dot-' + pinCount);
-        if (dot) dot.classList.add('filled');
-        
-        // تشغيل الأغنية من أول ضغطة
-        let audio = document.getElementById('bgMusic');
-        if (audio && audio.paused) {
-            audio.play().catch(e => console.log('Audio init'));
-        }
-
-        // لما تكتب 4 أرقام نفحصهم
-        if (pinCount === 4) {
-            if (currentPin === "1982") {
-                // لو صح يفتح
-                setTimeout(unlockSequence, 500);
-            } else {
-                // لو غلط يظهر الرسالة ويفضي النقط
-                setTimeout(() => {
-                    if (errorMsg) errorMsg.style.opacity = '1';
-                    resetKeypad();
-                }, 400);
+        function pressKey(num) {
+            let errorMsg = document.getElementById('pin-error');
+            
+            // إخفاء رسالة الخطأ لو بدأت تكتب من جديد
+            if (pinCount === 0) {
+                errorMsg.style.opacity = '0';
             }
-        }
-    }
-}
 
-// تفريغ النقط لو الباسورد كان غلط
-function resetKeypad() {
-    pinCount = 0;
-    currentPin = "";
-    document.getElementById('dot-1').classList.remove('filled');
-    document.getElementById('dot-2').classList.remove('filled');
-    document.getElementById('dot-3').classList.remove('filled');
-    document.getElementById('dot-4').classList.remove('filled');
-}
+            if (pinCount < 4) {
+                pinCount++;
+                currentPin += num;
+                document.getElementById('dot-' + pinCount).classList.add('filled');
+                
                 // تشغيل الأغنية من أول ضغطة
                 let audio = document.getElementById('bgMusic');
                 if (audio && audio.paused) {
@@ -315,12 +277,30 @@ function resetKeypad() {
                 }
 
                 if (pinCount === 4) {
-                    setTimeout(unlockSequence, 500);
+                    if (currentPin === "1982") {
+                        setTimeout(unlockSequence, 500);
+                    } else {
+                        // لو الباسورد غلط
+                        setTimeout(() => {
+                            errorMsg.style.opacity = '1';
+                            resetKeypad();
+                        }, 400);
+                    }
                 }
             }
         }
 
-        // ================= ترتيب ظهور الشاشات (زي الفيديو بالظبط) =================
+        // تفريغ النقط لو الباسورد كان غلط
+        function resetKeypad() {
+            pinCount = 0;
+            currentPin = "";
+            document.getElementById('dot-1').classList.remove('filled');
+            document.getElementById('dot-2').classList.remove('filled');
+            document.getElementById('dot-3').classList.remove('filled');
+            document.getElementById('dot-4').classList.remove('filled');
+        }
+
+        // ================= ترتيب ظهور الشاشات =================
         function unlockSequence() {
             document.getElementById('screen-keypad').classList.add('hidden-screen');
             document.getElementById('screen-unlocked').classList.remove('hidden-screen');
@@ -345,9 +325,9 @@ function resetKeypad() {
                 setTimeout(() => {
                     document.getElementById('screen-intro2').classList.add('hidden-screen');
                     document.getElementById('main-content').style.display = 'block';
-                    createParticles(); // تشغيل القلوب
-                    initScrollObserver(); // تشغيل حركة السكرول
-                    initScratchCards(); // تفعيل كروت الخربشة
+                    createParticles(); 
+                    initScrollObserver(); 
+                    initScratchCards(); 
                 }, 1000);
             }, 8500);
         }
@@ -374,11 +354,9 @@ function resetKeypad() {
                 const ctx = canvas.getContext('2d');
                 canvas.width = 150; canvas.height = 150;
                 
-                // تلوين الكارت من فوق
                 ctx.fillStyle = '#e0acb8';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
-                // كتابة نص التوجيه
                 ctx.font = 'bold 16px Cairo';
                 ctx.fillStyle = '#fff';
                 ctx.textAlign = 'center';
@@ -396,7 +374,7 @@ function resetKeypad() {
 
                 function scratch(e) {
                     if (!isDrawing) return;
-                    e.preventDefault(); // منع السكرول وانت بتخربش
+                    e.preventDefault();
                     const pos = getPos(e);
                     ctx.globalCompositeOperation = 'destination-out';
                     ctx.beginPath();
@@ -425,7 +403,6 @@ function resetKeypad() {
             document.getElementById('final-sec').style.display = 'block';
             setTimeout(() => {
                 document.getElementById('final-sec').scrollIntoView({ behavior: 'smooth' });
-                // فك بلور الصورة بعد ثانيتين زي الفيديو
                 setTimeout(() => {
                     document.getElementById('blur-photo').classList.add('clear');
                 }, 1500);
