@@ -156,7 +156,7 @@
             <div class="key" onclick="pressKey()">9</div>
             <div class="key key-bottom" onclick="pressKey()">0</div>
         </div>
-        <p style="margin-top: 30px; color: #888; font-size: 0.9rem;">اكتبي أي ٤ أرقام لفتح الرسالة</p>
+        <p style="margin-top: 30px; color: #888; font-size: 0.9rem;">سنة ميلاد القمر </p>
     </div>
 
     <!-- ================= شاشة فتح القفل ================= -->
@@ -179,9 +179,9 @@
         
         <!-- الهيدر -->
         <div class="header-sec fade-up">
-            <h1 class="main-title">Happy Birthday,</h1>
-            <h2 class="main-subtitle">Mom.</h2>
-            <div class="scroll-indicator">SCROLL TO BEGIN<br>↓</div>
+            <h1 class="main-title">Happy Birthday❤🎉</h1>
+            <h2 class="main-subtitle">امي</h2>
+            <div class="scroll-indicator">❤انزلي تحت شوفي المفاجاة❤<br>↓</div>
         </div>
 
         <!-- قسم الذكريات -->
@@ -190,12 +190,15 @@
             <div class="section-sub">أحلى أيام عمري هي اللي معاكي</div>
             
             <img src="photo1.jpg" class="story-photo fade-up">
+             <img src="photo2.jpg" class="story-photo fade-up">
             <div class="story-text fade-up">كل يوم بيمر عليا وأنا بشوفك بخير هو أجمل يوم في حياتي 🤍</div>
 
-            <img src="photo2.jpg" class="story-photo fade-up">
+            <img src="photo3.jpg" class="story-photo fade-up">
+             <img src="photo4.jpg" class="story-photo fade-up">
             <div class="story-text fade-up">ربنا يخليكي لينا يا ست الكل وما يحرمناش من ضحكتك أبداً</div>
 
-            <img src="photo3.jpg" class="story-photo fade-up">
+            <img src="photo5.jpg" class="story-photo fade-up">
+             <img src="photo6.jpg" class="story-photo fade-up">
             <div class="story-text fade-up">مهما كبرت هفضل محتاج حضنك ودعواتك اللي ممشياني في الدنيا</div>
         </div>
 
@@ -252,9 +255,22 @@
     </div>
 
     <script>
+        var starsContainer = document.getElementById('stars');
+        var emojis = ['💝', '💗', '💕', '❤', '🤍', '🧡'];
+        for (var k = 0; k < 35; k++) {
+            var star = document.createElement('div');
+            star.className = 'shape';
+            star.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            star.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDuration = (Math.random() * 8 + 8) + 's';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            if (starsContainer) { starsContainer.appendChild(star); }
+        }
         // ================= برمجة الباسورد =================
         let pinCount = 0;
-        function pressKey() {
+        function pressKey(1982) {
             if (pinCount < 4) {
                 pinCount++;
                 document.getElementById('dot-' + pinCount).classList.add('filled');
