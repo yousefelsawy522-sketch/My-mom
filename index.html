@@ -122,6 +122,57 @@
 
         .particle { position: fixed; pointer-events: none; opacity: 0; animation: floatHeart 4s linear forwards; font-size: 1.2rem; z-index: 999; }
         @keyframes floatHeart { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
+  /* ================= شكل ألبوم الصور الجديد (12 صورة) ================= */
+.album-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.album-item {
+    background: #fff;
+    padding: 10px 10px 20px 10px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: calc(33.333% - 20px); /* 3 صور في الصف للكمبيوتر */
+    min-width: 140px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    border: 1px solid var(--envelope-bg);
+}
+
+/* ميل خفيف للصور عشان تدي شكل ألبوم حقيقي */
+.album-item:nth-child(odd) { transform: rotate(-3deg); }
+.album-item:nth-child(even) { transform: rotate(3deg); }
+.album-item:nth-child(3n) { transform: rotate(-1deg); }
+
+.album-item:hover {
+    transform: scale(1.15) rotate(0deg) !important;
+    z-index: 10;
+    box-shadow: 0 15px 30px rgba(139, 28, 49, 0.2);
+}
+.album-item img {
+    width: 100%;
+    aspect-ratio: 3/4; /* صور طولية عشان الأشخاص تبان كاملة */
+    object-fit: cover;
+    border-radius: 5px;
+}
+.album-item p {
+    text-align: center;
+    margin: 10px 0 0 0;
+    font-size: 1.2rem;
+}
+
+/* تظبيط مقاسات الموبايل */
+@media(max-width: 600px) {
+    .album-item {
+        width: calc(50% - 20px); /* صورتين في الصف للموبايل عشان يبقوا كبار وواضحين */
+    }
+    }
+        
     </style>
 </head>
 <body>
@@ -308,57 +359,7 @@
             document.getElementById('dot-3').classList.remove('filled');
             document.getElementById('dot-4').classList.remove('filled');
         }
-/* ================= شكل ألبوم الصور الجديد (12 صورة) ================= */
-.album-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-}
-.album-item {
-    background: #fff;
-    padding: 10px 10px 20px 10px;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    width: calc(33.333% - 20px); /* 3 صور في الصف للكمبيوتر */
-    min-width: 140px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    position: relative;
-    border: 1px solid var(--envelope-bg);
-}
 
-/* ميل خفيف للصور عشان تدي شكل ألبوم حقيقي */
-.album-item:nth-child(odd) { transform: rotate(-3deg); }
-.album-item:nth-child(even) { transform: rotate(3deg); }
-.album-item:nth-child(3n) { transform: rotate(-1deg); }
-
-.album-item:hover {
-    transform: scale(1.15) rotate(0deg) !important;
-    z-index: 10;
-    box-shadow: 0 15px 30px rgba(139, 28, 49, 0.2);
-}
-.album-item img {
-    width: 100%;
-    aspect-ratio: 3/4; /* صور طولية عشان الأشخاص تبان كاملة */
-    object-fit: cover;
-    border-radius: 5px;
-}
-.album-item p {
-    text-align: center;
-    margin: 10px 0 0 0;
-    font-size: 1.2rem;
-}
-
-/* تظبيط مقاسات الموبايل */
-@media(max-width: 600px) {
-    .album-item {
-        width: calc(50% - 20px); /* صورتين في الصف للموبايل عشان يبقوا كبار وواضحين */
-    }
-        }
-    
         // ================= ترتيب ظهور الشاشات =================
         function unlockSequence() {
             document.getElementById('screen-keypad').classList.add('hidden-screen');
