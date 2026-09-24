@@ -182,24 +182,32 @@
             <div class="scroll-indicator">SCROLL TO BEGIN<br>↓</div>
         </div>
 
-        <!-- قسم الذكريات -->
-        <div class="fade-up" style="margin-top: 50px;">
-            <div class="section-title">Our Story</div>
-            <div class="section-sub">أحلى أيام عمري هي اللي معاكي</div>
-            
-            <img src="photo1.jpg" class="story-photo fade-up">
-             <img src="photo2.jpg" class="story-photo fade-up">
-            <div class="story-text fade-up">كل يوم بيمر عليا وأنا بشوفك بخير هو أجمل يوم في حياتي 🤍</div>
+        <!-- قسم الذكريات (الألبوم الجديد) -->
+<div class="fade-up" style="margin-top: 50px;">
+    <div class="section-title">Our Story</div>
+    <div class="section-sub">أحلى أيام عمري هي اللي معاكي 🤍</div>
+    
+    <!-- شبكة الـ 12 صورة -->
+    <div class="album-grid">
+        <div class="album-item fade-up"><img src="photo1.jpg"><p>🤍</p></div>
+        <div class="album-item fade-up"><img src="photo2.jpg"><p>✨</p></div>
+        <div class="album-item fade-up"><img src="photo3.jpg"><p>🤍</p></div>
+        <div class="album-item fade-up"><img src="photo4.jpg"><p>🌸</p></div>
+        <div class="album-item fade-up"><img src="photo5.jpg"><p>🤍</p></div>
+        <div class="album-item fade-up"><img src="photo6.jpg"><p>✨</p></div>
+        <div class="album-item fade-up"><img src="photo8.jpg"><p>🌸</p></div>
+        <div class="album-item fade-up"><img src="photo9.jpg"><p>🤍</p></div>
+        <div class="album-item fade-up"><img src="photo10.jpg"><p>✨</p></div>
+        <div class="album-item fade-up"><img src="photo11.jpg"><p>🤍</p></div>
+    
+    </div>
 
-            <img src="photo3.jpg" class="story-photo fade-up">
-                        <img src="photo4.jpg" class="story-photo fade-up">
-            <div class="story-text fade-up">ربنا يخليكي لينا يا ست الكل وما يحرمناش من ضحكتك أبداً</div>
+    <!-- رسالة مجمعة تحت الصور -->
+    <div class="story-text fade-up" style="margin-top: 40px; font-size: 1.3rem;">
+        كل صورة من دول شايلة حكاية، وتعب، وحب كبير أوي.. ربنا يخليكي لينا يا ست الكل وما يحرمناش من ضحكتك أبداً 🤍
+    </div>
+</div>
 
-            <img src="photo5.jpg" class="story-photo fade-up">
-                        <img src="photo6.JPG" class="story-photo fade-up">
-            <div class="story-text fade-up">مهما كبرت هفضل محتاج حضنك ودعواتك اللي ممشياني في الدنيا</div>
-             <img src="photo8.jpg" class="story-photo fade-up">
-        </div>
 
         <!-- قسم كروت الخربشة (Scratch Cards) -->
         <div class="fade-up" style="margin-top: 80px;">
@@ -300,7 +308,57 @@
             document.getElementById('dot-3').classList.remove('filled');
             document.getElementById('dot-4').classList.remove('filled');
         }
+/* ================= شكل ألبوم الصور الجديد (12 صورة) ================= */
+.album-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.album-item {
+    background: #fff;
+    padding: 10px 10px 20px 10px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: calc(33.333% - 20px); /* 3 صور في الصف للكمبيوتر */
+    min-width: 140px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    border: 1px solid var(--envelope-bg);
+}
 
+/* ميل خفيف للصور عشان تدي شكل ألبوم حقيقي */
+.album-item:nth-child(odd) { transform: rotate(-3deg); }
+.album-item:nth-child(even) { transform: rotate(3deg); }
+.album-item:nth-child(3n) { transform: rotate(-1deg); }
+
+.album-item:hover {
+    transform: scale(1.15) rotate(0deg) !important;
+    z-index: 10;
+    box-shadow: 0 15px 30px rgba(139, 28, 49, 0.2);
+}
+.album-item img {
+    width: 100%;
+    aspect-ratio: 3/4; /* صور طولية عشان الأشخاص تبان كاملة */
+    object-fit: cover;
+    border-radius: 5px;
+}
+.album-item p {
+    text-align: center;
+    margin: 10px 0 0 0;
+    font-size: 1.2rem;
+}
+
+/* تظبيط مقاسات الموبايل */
+@media(max-width: 600px) {
+    .album-item {
+        width: calc(50% - 20px); /* صورتين في الصف للموبايل عشان يبقوا كبار وواضحين */
+    }
+        }
+    
         // ================= ترتيب ظهور الشاشات =================
         function unlockSequence() {
             document.getElementById('screen-keypad').classList.add('hidden-screen');
