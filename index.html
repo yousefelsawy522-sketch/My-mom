@@ -122,56 +122,87 @@
 
         .particle { position: fixed; pointer-events: none; opacity: 0; animation: floatHeart 4s linear forwards; font-size: 1.2rem; z-index: 999; }
         @keyframes floatHeart { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
-  /* ================= شكل ألبوم الصور الجديد (12 صورة) ================= */
-.album-grid {
+  /* ================= شكل عرض الصور الجديد (بولارويد سكراب بوك - 11 صورة) ================= */
+.album-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    max-width: 900px;
+    gap: 30px;
+    max-width: 950px;
     margin: 0 auto;
     padding: 20px;
 }
-.album-item {
+
+.polaroid-item {
     background: #fff;
-    padding: 10px 10px 20px 10px;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    width: calc(33.333% - 20px); /* 3 صور في الصف للكمبيوتر */
-    min-width: 140px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    padding: 12px 12px 40px 12px; /* مساحة من تحت عشان الكلمة */
+    border-radius: 3px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    width: calc(33.333% - 30px);
+    min-width: 150px;
     position: relative;
-    border: 1px solid var(--envelope-bg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #eaeaea;
 }
 
-/* ميل خفيف للصور عشان تدي شكل ألبوم حقيقي */
-.album-item:nth-child(odd) { transform: rotate(-3deg); }
-.album-item:nth-child(even) { transform: rotate(3deg); }
-.album-item:nth-child(3n) { transform: rotate(-1deg); }
+/* شكل اللزقة الشفافة (Washi Tape) من فوق */
+.polaroid-item::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 70px;
+    height: 25px;
+    background: rgba(217, 140, 179, 0.6); /* بينك شفاف */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    z-index: 2;
+}
 
-.album-item:hover {
+.polaroid-item:nth-child(even)::before {
+    background: rgba(139, 28, 49, 0.5); /* عنابي شفاف */
+    transform: translateX(-50%) rotate(4deg);
+}
+
+/* ميل الصور بشكل عشوائي خفيف */
+.polaroid-item:nth-child(even) { transform: rotate(4deg); }
+.polaroid-item:nth-child(odd) { transform: rotate(-3deg); }
+.polaroid-item:nth-child(3n) { transform: rotate(1.5deg); }
+
+.polaroid-item:hover {
     transform: scale(1.15) rotate(0deg) !important;
-    z-index: 10;
-    box-shadow: 0 15px 30px rgba(139, 28, 49, 0.2);
-}
-.album-item img {
-    width: 100%;
-    aspect-ratio: 3/4; /* صور طولية عشان الأشخاص تبان كاملة */
-    object-fit: cover;
-    border-radius: 5px;
-}
-.album-item p {
-    text-align: center;
-    margin: 10px 0 0 0;
-    font-size: 1.2rem;
+    z-index: 20;
+    box-shadow: 0 20px 40px rgba(139, 28, 49, 0.3);
 }
 
-/* تظبيط مقاسات الموبايل */
-@media(max-width: 600px) {
-    .album-item {
-        width: calc(50% - 20px); /* صورتين في الصف للموبايل عشان يبقوا كبار وواضحين */
+.polaroid-item img {
+    width: 100%;
+    aspect-ratio: 3/4; /* صورة طولية مظبوطة */
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.polaroid-item p {
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--dark-pink);
+    font-weight: 800;
+    font-family: 'Cairo', sans-serif;
+}
+
+/* تظبيط مقاسات الموبايل عشان يظهر صورتين جنب بعض مرتاحين */
+@media(max-width: 700px) {
+    .polaroid-item {
+        width: calc(50% - 30px);
+        min-width: 130px;
     }
-    }
+}
+        
         
     </style>
 </head>
@@ -237,22 +268,29 @@
 <div class="fade-up" style="margin-top: 50px;">
     <div class="section-title">Our Story</div>
     <div class="section-sub">أحلى أيام عمري هي اللي معاكي 🤍</div>
+    <!-- قسم الذكريات (الألبوم الجديد 11 صورة) -->
+<div class="fade-up" style="margin-top: 50px;">
+    <div class="section-title">Our Story</div>
+    <div class="section-sub">كل صورة بتحكي قصة حب وتعب عشاننا 🤍</div>
     
-    <!-- شبكة الـ 12 صورة -->
-    <div class="album-grid">
-        <div class="album-item fade-up"><img src="photo1.jpg"><p>🤍</p></div>
-        <div class="album-item fade-up"><img src="photo2.jpg"><p>✨</p></div>
-        <div class="album-item fade-up"><img src="photo3.jpg"><p>🤍</p></div>
-        <div class="album-item fade-up"><img src="photo4.jpg"><p>🌸</p></div>
-        <div class="album-item fade-up"><img src="photo5.jpg"><p>🤍</p></div>
-        <div class="album-item fade-up"><img src="photo6.jpg"><p>✨</p></div>
-        <div class="album-item fade-up"><img src="photo8.JPG"><p>🌸</p></div>
-        <div class="album-item fade-up"><img src="photo9.jpg"><p>🤍</p></div>
-        <div class="album-item fade-up"><img src="photo10.jpg"><p>✨</p></div>
-        <div class="album-item fade-up"><img src="photo11.jpg"><p>🤍</p></div>
-    
+    <div class="album-container">
+        <div class="polaroid-item fade-up"><img src="photo1.jpg"><p>👑</p></div>
+        <div class="polaroid-item fade-up"><img src="photo2.jpg"><p>أمي</p></div>
+        <div class="polaroid-item fade-up"><img src="photo3.jpg"><p>ست الكل</p></div>
+        <div class="polaroid-item fade-up"><img src="photo4.jpg"><p>💕</p></div>
+        <div class="polaroid-item fade-up"><img src="photo5.jpg"><p>حياتي</p></div>
+        <div class="story-text fade-up" style="margin-top: 50px; font-size: 1.3rem;">
+        ربنا يخليكي لينا يا ست الكل وما يحرمناش من وجودك اللي منور دنيتنا 🤍
+        </div>
+        <div class="polaroid-item fade-up"><img src="photo6.JPG"><p>نور عيني</p></div>
+        
+        <div class="polaroid-item fade-up"><img src="photo8.jpg"><p>قلبي</p></div>
+        <div class="polaroid-item fade-up"><img src="photo9.jpg"><p>❤️</p></div>
+        <div class="polaroid-item fade-up"><img src="photo10.jpg"><p>🤍</p></div>
+        <div class="polaroid-item fade-up"><img src="photo11.jpg"><p>أغلى الناس</p></div>
     </div>
 
+    
     <!-- رسالة مجمعة تحت الصور -->
     <div class="story-text fade-up" style="margin-top: 40px; font-size: 1.3rem;">
         كل صورة من دول شايلة حكاية، وتعب، وحب كبير أوي.. ربنا يخليكي لينا يا ست الكل وما يحرمناش من ضحكتك أبداً 🤍
