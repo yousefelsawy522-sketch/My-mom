@@ -253,6 +253,9 @@
     <div id="screen-intro2" class="fixed-screen hidden-screen">
         <div class="intro-text" id="text-intro2">النهارده عيد ميلاد دنيتي كلها 🤍</div>
     </div>
+<div id="screen-intro2" class="fixed-screen hidden-screen">
+        <div class="intro-text" id="text-intro2">عيد ميلاد ست الكل حبيبت قلبي امي حياتي ❤️</div>
+    </div>
 
     <!-- ================= المحتوى الرئيسي (السكرول) ================= -->
     <div id="main-content">
@@ -263,20 +266,32 @@
             <h2 class="main-subtitle">Mom.</h2>
             <div class="scroll-indicator">SCROLL TO BEGIN<br>↓</div>
         </div>
+ <!-- قسم الجواب -->
+        <div class="fade-up" style="margin-top: 100px;">
+            <div class="section-title" style="font-size: 2rem;">A letter from my heart.</div>
+            <div class="section-sub">اضغطي على الجواب عشان تفتحيه 💌</div>
 
+            <div class="envelope-wrapper fade-up" id="the-envelope" onclick="toggleEnvelope(this)"
+                <div class="env-back"></div>
+                <div class="env-letter">
+                            نور عينا وحياتي<br><br>
+                    إلى نور عيني ومهجة قلبي، كل سنة وأنتِ منورة حياتنا ومجمّعانا دايماً على حبك وحنيتك. كل سنة وأنتِ أجمل حاجة في دنيتي. ربنا يطول في عمرك ويديكي الصحة والعافية، وميحرمنيش من ضحكتك اللي بتخلي للدنيا طعم. ابنك بيحبك أكتر من أي كلام ممكن يتكتب، وكل أمنيته يشوفك دايماً مبسوطة🌸✨<br><br>
+                
+                </div>
+                <div class="env-flap"></div>
+                <div class="env-front"></div>
+            </div>
+        </div>
         <!-- قسم الذكريات (الألبوم الجديد) -->
 <div class="fade-up" style="margin-top: 50px;">
     <div class="section-title">Our Story</div>
     <div class="section-sub">أحلى أيام عمري هي اللي معاكي 🤍</div>
-    <!-- قسم الذكريات (الألبوم الجديد 11 صورة) -->
-<div class="fade-up" style="margin-top: 50px;">
-    <div class="section-title">Our Story</div>
     <div class="section-sub">كل صورة بتحكي قصة حب وتعب عشاننا 🤍</div>
     
     <div class="album-container">
-        <div class="polaroid-item fade-up"><img src="photo1.jpg"><p>👑</p></div>
+        <div class="polaroid-item fade-up"><img src="photo1.jpg"><p>ست الكل</p></div>
         <div class="polaroid-item fade-up"><img src="photo2.jpg"><p>أمي</p></div>
-        <div class="polaroid-item fade-up"><img src="photo3.jpg"><p>ست الكل</p></div>
+        <div class="polaroid-item fade-up"><img src="photo3.jpg"><p>👑</p></div>
         <div class="polaroid-item fade-up"><img src="photo4.jpg"><p>💕</p></div>
         <div class="polaroid-item fade-up"><img src="photo5.jpg"><p>حياتي</p></div>
         <div class="story-text fade-up" style="margin-top: 50px; font-size: 1.3rem;">
@@ -289,9 +304,6 @@
         <div class="polaroid-item fade-up"><img src="photo10.jpg"><p>🤍</p></div>
         <div class="polaroid-item fade-up"><img src="photo11.jpg"><p>أغلى الناس</p></div>
     </div>
-
-    
-    <!-- رسالة مجمعة تحت الصور -->
     <div class="story-text fade-up" style="margin-top: 40px; font-size: 1.3rem;">
         كل صورة من دول شايلة حكاية، وتعب، وحب كبير أوي.. ربنا يخليكي لينا يا ست الكل وما يحرمناش من ضحكتك أبداً 🤍
     </div>
@@ -305,15 +317,15 @@
             
             <div class="scratch-container">
                 <div class="scratch-wrapper fade-up">
-                    <div class="scratch-content">حنيتك وطيبة قلبك اللي مفيش زيهم 🤍</div>
+                    <div class="scratch-content">حنيتك اللي بتغنيني عن الدنيا كلها، وحضنك اللي بنسى فيه أي تعب 🤍</div>
                     <canvas id="scratch1" class="scratch-canvas"></canvas>
                 </div>
                 <div class="scratch-wrapper fade-up">
-                    <div class="scratch-content">دعواتك اللي سانداني وفاتحالي أبواب الرزق 🤲</div>
+                    <div class="scratch-content">دعواتك اللي دايماً سانداني وفاتحالي أبواب الرزق في كل خطوة 🤲</div>
                     <canvas id="scratch2" class="scratch-canvas"></canvas>
                 </div>
                 <div class="scratch-wrapper fade-up">
-                    <div class="scratch-content">ضحكتك اللي بتنور البيت وتنسيني همومي ✨</div>
+                    <div class="scratch-content">رضاكي عني اللي هو أكبر إنجاز في حياتي وأغلى أمنية بتمناها ✨</div>
                     <canvas id="scratch3" class="scratch-canvas"></canvas>
                 </div>
             </div>
@@ -324,7 +336,7 @@
             <div class="section-title" style="font-size: 2rem;">A letter from my heart.</div>
             <div class="section-sub">اضغطي على الجواب عشان تفتحيه 💌</div>
 
-            <div class="envelope-wrapper fade-up" id="the-envelope" onclick="openEnvelope()">
+            <div class="envelope-wrapper fade-up" id="the-envelope" onclick="toggleEnvelope(this)"
                 <div class="env-back"></div>
                 <div class="env-letter">
                     يا أعظم أم في الدنيا،<br><br>
@@ -491,10 +503,12 @@
             });
         }
 
-        // ================= فتح الجواب =================
-        function openEnvelope() {
-            document.getElementById('the-envelope').classList.add('open');
-        }
+        // ================= فتح وقفل أي جواب في الموقع =================
+function toggleEnvelope(element) {
+    element.classList.toggle('open');
+}
+
+
 
         // ================= إظهار المفاجأة الأخيرة =================
         function showFinal() {
