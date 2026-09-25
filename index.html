@@ -75,39 +75,40 @@
         .story-photo { width: 80%; max-width: 400px; margin: 0 auto 20px auto; display: block; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .story-text { text-align: center; font-size: 1.2rem; font-weight: 800; color: var(--dark-pink); width: 80%; margin: 0 auto 60px auto; line-height: 1.8; }
 
+    
         /* ================= 4. كروت الخربشة (Scratch Cards) ================= */
-        .scratch-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
-        .scratch-wrapper { position: relative; width: 150px; height: 150px; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .scratch-content { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #fff; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; font-weight: 800; color: var(--dark-pink); text-align: center; padding: 10px; box-sizing: border-box;
-        }
-        canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; touch-action: none; cursor: pointer; }
+.scratch-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+.scratch-wrapper { position: relative; width: 150px; height: 150px; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; z-index: 1; }
+.scratch-content { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; font-weight: 800; color: #8b2b4d; text-align: center; padding: 10px; box-sizing: border-box; z-index: 1;
+}
+canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; touch-action: none; cursor: pointer; }
 
-        /* ================= 5. الجواب (Envelope) ================= */
-        .envelope-wrapper { position: relative; width: 300px; height: 200px; margin: 50px auto; cursor: pointer; }
-        .env-back { position: absolute; bottom: 0; width: 100%; height: 100%; background: #e0acb8; border-radius: 5px; }
-        .env-letter { 
-            position: absolute; bottom: 10px; left: 5%; width: 90%; height: 90%; 
-            background: #fff; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            transition: all 0.8s ease; padding: 20px; box-sizing: border-box;
-            font-size: 1rem; font-weight: 600; color: var(--text-dark); line-height: 1.8;
-            overflow: hidden;
-        }
-        .env-front { 
-            position: absolute; bottom: 0; width: 100%; height: 100%; 
-            background: var(--envelope-bg); border-radius: 5px; z-index: 3;
-            clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 50%, 0 0);
-        }
-        .env-flap { 
-            position: absolute; top: 0; width: 100%; height: 100%; 
-            background: #f2cbd3; border-radius: 5px; z-index: 4;
-            clip-path: polygon(0 0, 100% 0, 50% 55%);
-            transform-origin: top; transition: all 0.6s ease;
-        }
-        .envelope-wrapper.open .env-flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope-wrapper.open .env-letter { transform: translateY(-150px); height: 350px; z-index: 2; overflow-y: auto; }
+/* ================= 5. الجواب (Envelope) ================= */
+.envelope-wrapper { position: relative; width: 300px; height: 200px; margin: 50px auto; cursor: pointer; }
+.env-back { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: #e0acb8; border-radius: 5px; z-index: 1; }
+.env-letter { 
+    position: absolute; bottom: 10px; left: 5%; width: 90%; height: 90%; 
+    background: #fff; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: all 0.8s ease; padding: 20px; box-sizing: border-box;
+    font-size: 1.1rem; font-weight: 600; color: #3a1c24; line-height: 1.8;
+    overflow: hidden; z-index: 2; text-align: center;
+}
+.env-front { 
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
+    background: #f4dce1; border-radius: 5px; z-index: 4;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 50%, 0 0);
+}
+.env-flap { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    background: #f2cbd3; border-radius: 5px; z-index: 5;
+    clip-path: polygon(0 0, 100% 0, 50% 55%);
+    transform-origin: top; transition: all 0.6s ease;
+}
+.envelope-wrapper.open .env-flap { transform: rotateX(180deg); z-index: 1; }
+.envelope-wrapper.open .env-letter { transform: translateY(-150px); height: 350px; z-index: 3; overflow-y: auto; }
 
         /* ================= 6. المفاجأة والنهاية ================= */
         .cake-btn { 
