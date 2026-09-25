@@ -75,42 +75,41 @@
         .story-photo { width: 80%; max-width: 400px; margin: 0 auto 20px auto; display: block; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .story-text { text-align: center; font-size: 1.2rem; font-weight: 800; color: var(--dark-pink); width: 80%; margin: 0 auto 60px auto; line-height: 1.8; }
 
-    
         /* ================= 4. كروت الخربشة (Scratch Cards) ================= */
-.scratch-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
-.scratch-wrapper { position: relative; width: 200px; height: 200px; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; z-index: 1; }
-.scratch-content { 
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-    background: #fff; display: flex; align-items: center; justify-content: center; flex-direction: column;
-    font-size: 1rem; font-weight: 800; color: #8b2b4d; text-align: center; padding: 15px; box-sizing: border-box; z-index: 1; line-height: 1.8;
-}
-canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; touch-action: none; cursor: pointer; }
+        .scratch-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+        .scratch-wrapper { position: relative; width: 200px; height: 200px; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; z-index: 1; }
+        .scratch-content { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #fff; display: flex; align-items: center; justify-content: center; flex-direction: column;
+            font-size: 1rem; font-weight: 800; color: #8b2b4d; text-align: center; padding: 15px; box-sizing: border-box; z-index: 1; line-height: 1.8;
+        }
+        canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; touch-action: none; cursor: pointer; }
 
-/* ================= 5. الجواب (Envelope) ================= */
-.envelope-container { display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 30px; }
-.envelope-wrapper { position: relative; width: 300px; height: 200px; cursor: pointer; }
-.env-back { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: #e0acb8; border-radius: 5px; z-index: 1; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-.env-letter { 
-    position: absolute; bottom: 10px; left: 5%; width: 90%; height: 90%; 
-    background: #fff; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    transition: all 0.8s ease; padding: 20px; box-sizing: border-box;
-    font-size: 1.1rem; font-weight: 800; color: #3a1c24; line-height: 1.8;
-    overflow: hidden; z-index: 2; text-align: center;
-}
-.env-front { 
-    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
-    background: #f4dce1; border-radius: 5px; z-index: 4;
-    clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 50%, 0 0);
-}
-.env-flap { 
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-    background: #f2cbd3; border-radius: 5px; z-index: 5;
-    clip-path: polygon(0 0, 100% 0, 50% 55%);
-    transform-origin: top; transition: all 0.6s ease;
-}
-.envelope-wrapper.open .env-flap { transform: rotateX(180deg); z-index: 1; }
-.envelope-wrapper.open .env-letter { transform: translateY(-160px); height: 380px; z-index: 3; overflow-y: auto; }
-        
+        /* ================= 5. الجواب (Envelope) ================= */
+        .envelope-container { display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 30px; }
+        .envelope-wrapper { position: relative; width: 300px; height: 200px; cursor: pointer; }
+        .env-back { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: #e0acb8; border-radius: 5px; z-index: 1; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .env-letter { 
+            position: absolute; bottom: 10px; left: 5%; width: 90%; height: 90%; 
+            background: #fff; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: all 0.8s ease; padding: 20px; box-sizing: border-box;
+            font-size: 1.1rem; font-weight: 800; color: #3a1c24; line-height: 1.8;
+            overflow: hidden; z-index: 2; text-align: center;
+        }
+        .env-front { 
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
+            background: #f4dce1; border-radius: 5px; z-index: 4;
+            clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 50%, 0 0);
+        }
+        .env-flap { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #f2cbd3; border-radius: 5px; z-index: 5;
+            clip-path: polygon(0 0, 100% 0, 50% 55%);
+            transform-origin: top; transition: all 0.6s ease;
+        }
+        .envelope-wrapper.open .env-flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-wrapper.open .env-letter { transform: translateY(-160px); height: 380px; z-index: 3; overflow-y: auto; }
+                
         /* ================= 6. المفاجأة والنهاية ================= */
         .cake-btn { 
             background: var(--primary-pink); color: #fff; border: none; padding: 15px 40px; 
@@ -124,88 +123,84 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
 
         .particle { position: fixed; pointer-events: none; opacity: 0; animation: floatHeart 4s linear forwards; font-size: 1.2rem; z-index: 999; }
         @keyframes floatHeart { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
-  /* ================= شكل عرض الصور الجديد (بولارويد سكراب بوك - 11 صورة) ================= */
-.album-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    max-width: 950px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.polaroid-item {
-    background: #fff;
-    padding: 12px 12px 40px 12px; /* مساحة من تحت عشان الكلمة */
-    border-radius: 3px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    width: calc(33.333% - 30px);
-    min-width: 150px;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid #eaeaea;
-}
-
-/* شكل اللزقة الشفافة (Washi Tape) من فوق */
-.polaroid-item::before {
-    content: '';
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-3deg);
-    width: 70px;
-    height: 25px;
-    background: rgba(217, 140, 179, 0.6); /* بينك شفاف */
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    z-index: 2;
-}
-
-.polaroid-item:nth-child(even)::before {
-    background: rgba(139, 28, 49, 0.5); /* عنابي شفاف */
-    transform: translateX(-50%) rotate(4deg);
-}
-
-/* ميل الصور بشكل عشوائي خفيف */
-.polaroid-item:nth-child(even) { transform: rotate(4deg); }
-.polaroid-item:nth-child(odd) { transform: rotate(-3deg); }
-.polaroid-item:nth-child(3n) { transform: rotate(1.5deg); }
-
-.polaroid-item:hover {
-    transform: scale(1.15) rotate(0deg) !important;
-    z-index: 20;
-    box-shadow: 0 20px 40px rgba(139, 28, 49, 0.3);
-}
-
-.polaroid-item img {
-    width: 100%;
-    aspect-ratio: 3/4; /* صورة طولية مظبوطة */
-    object-fit: cover;
-    border-radius: 2px;
-}
-
-.polaroid-item p {
-    position: absolute;
-    bottom: 8px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    font-size: 1.1rem;
-    color: var(--dark-pink);
-    font-weight: 800;
-    font-family: 'Cairo', sans-serif;
-}
-
-/* تظبيط مقاسات الموبايل عشان يظهر صورتين جنب بعض مرتاحين */
-@media(max-width: 700px) {
-    .polaroid-item {
-        width: calc(50% - 30px);
-        min-width: 130px;
-    }
-}
         
-        
+        /* ================= شكل عرض الصور (بولارويد سكراب بوك - 11 صورة) ================= */
+        .album-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .polaroid-item {
+            background: #fff;
+            padding: 12px 12px 40px 12px;
+            border-radius: 3px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            width: calc(33.333% - 30px);
+            min-width: 150px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #eaeaea;
+        }
+
+        .polaroid-item::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width: 70px;
+            height: 25px;
+            background: rgba(217, 140, 179, 0.6);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .polaroid-item:nth-child(even)::before {
+            background: rgba(139, 28, 49, 0.5);
+            transform: translateX(-50%) rotate(4deg);
+        }
+
+        .polaroid-item:nth-child(even) { transform: rotate(4deg); }
+        .polaroid-item:nth-child(odd) { transform: rotate(-3deg); }
+        .polaroid-item:nth-child(3n) { transform: rotate(1.5deg); }
+
+        .polaroid-item:hover {
+            transform: scale(1.15) rotate(0deg) !important;
+            z-index: 20;
+            box-shadow: 0 20px 40px rgba(139, 28, 49, 0.3);
+        }
+
+        .polaroid-item img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .polaroid-item p {
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--dark-pink);
+            font-weight: 800;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        @media(max-width: 700px) {
+            .polaroid-item {
+                width: calc(50% - 30px);
+                min-width: 130px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -252,11 +247,12 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
     <div id="screen-intro1" class="fixed-screen hidden-screen">
         <div class="intro-text" id="text-intro1">النهارده مش زي أي يوم عادي...</div>
     </div>
+    <!-- دمجنا النصين هنا عشان يظهروا لست الكل ورا بعض بشكل احترافي -->
     <div id="screen-intro2" class="fixed-screen hidden-screen">
-        <div class="intro-text" id="text-intro2">النهارده عيد ميلاد دنيتي كلها 🤍</div>
-    </div>
-<div id="screen-intro2" class="fixed-screen hidden-screen">
-        <div class="intro-text" id="text-intro2">عيد ميلاد ست الكل حبيبت قلبي امي حياتي ❤️</div>
+        <div class="intro-text" id="text-intro2">
+            النهارده عيد ميلاد دنيتي كلها 🤍<br><br>
+            عيد ميلاد ست الكل حبيبت قلبي امي حياتي ❤️
+        </div>
     </div>
 
     <!-- ================= المحتوى الرئيسي (السكرول) ================= -->
@@ -268,7 +264,8 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
             <h2 class="main-subtitle">Mom.</h2>
             <div class="scroll-indicator">SCROLL TO BEGIN<br>↓</div>
         </div>
-<!-- ================= 1. الجواب الأول (قبل الصور) ================= -->
+        
+        <!-- ================= 1. الجواب الأول (قبل الصور) ================= -->
         <div class="fade-up" style="margin-top: 60px;">
             <div class="section-title" style="font-size: 2.2rem;">A letter to you.</div>
             <div class="section-sub">اضغطي على الجواب عشان تفتحيه 💌</div>
@@ -287,34 +284,36 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
             </div>
         </div>
 
-        <!-- قسم الذكريات (الألبوم الجديد) -->
-<div class="fade-up" style="margin-top: 50px;">
-    <div class="section-title">Our Story</div>
-    <div class="section-sub">أحلى أيام عمري هي اللي معاكي 🤍</div>
-    <div class="section-sub">كل صورة بتحكي قصة حب وتعب عشاننا 🤍</div>
-    
-    <div class="album-container">
-        <div class="polaroid-item fade-up"><img src="photo1.jpg"><p>ست الكل</p></div>
-        <div class="polaroid-item fade-up"><img src="photo2.jpg"><p>أمي</p></div>
-        <div class="polaroid-item fade-up"><img src="photo3.jpg"><p>👑</p></div>
-        <div class="polaroid-item fade-up"><img src="photo4.jpg"><p>💕</p></div>
-        <div class="polaroid-item fade-up"><img src="photo5.jpg"><p>حياتي</p></div>
-        <div class="story-text fade-up" style="margin-top: 50px; font-size: 1.3rem;">
-        ربنا يخليكي لينا يا ست الكل وما يحرمناش من وجودك اللي منور دنيتنا 🤍
+        <!-- ================= 2. قسم الذكريات ================= -->
+        <div class="fade-up" style="margin-top: 50px;">
+            <div class="section-title">Our Story</div>
+            <div class="section-sub">أحلى أيام عمري هي اللي معاكي 🤍</div>
+            <div class="section-sub">كل صورة بتحكي قصة حب وتعب عشاننا 🤍</div>
+            
+            <div class="album-container">
+                <div class="polaroid-item fade-up"><img src="photo1.jpg"><p>ست الكل</p></div>
+                <div class="polaroid-item fade-up"><img src="photo2.jpg"><p>أمي</p></div>
+                <div class="polaroid-item fade-up"><img src="photo3.jpg"><p>👑</p></div>
+                <div class="polaroid-item fade-up"><img src="photo4.jpg"><p>💕</p></div>
+                <div class="polaroid-item fade-up"><img src="photo5.jpg"><p>حياتي</p></div>
+                
+                <div class="story-text fade-up" style="margin-top: 50px; font-size: 1.3rem; width: 100%;">
+                    ربنا يخليكي لينا يا ست الكل وما يحرمناش من وجودك اللي منور دنيتنا 🤍
+                </div>
+                
+                <div class="polaroid-item fade-up"><img src="photo6.JPG"><p>نور عيني</p></div>
+                <div class="polaroid-item fade-up"><img src="photo8.jpg"><p>قلبي</p></div>
+                <div class="polaroid-item fade-up"><img src="photo9.jpg"><p>❤️</p></div>
+                <div class="polaroid-item fade-up"><img src="photo10.jpg"><p>🤍</p></div>
+                <div class="polaroid-item fade-up"><img src="photo11.jpg"><p>أغلى الناس</p></div>
+            </div>
+            
+            <div class="story-text fade-up" style="margin-top: 40px; font-size: 1.3rem;">
+                كل صورة من دول شايلة حكاية، وتعب، وحب كبير أوي.. ربنا يخليكي لينا يا ست الكل وما يحرمناش من ضحكتك أبداً 🤍
+            </div>
         </div>
-        <div class="polaroid-item fade-up"><img src="photo6.JPG"><p>نور عيني</p></div>
-        
-        <div class="polaroid-item fade-up"><img src="photo8.jpg"><p>قلبي</p></div>
-        <div class="polaroid-item fade-up"><img src="photo9.jpg"><p>❤️</p></div>
-        <div class="polaroid-item fade-up"><img src="photo10.jpg"><p>🤍</p></div>
-        <div class="polaroid-item fade-up"><img src="photo11.jpg"><p>أغلى الناس</p></div>
-    </div>
-    <div class="story-text fade-up" style="margin-top: 40px; font-size: 1.3rem;">
-        كل صورة من دول شايلة حكاية، وتعب، وحب كبير أوي.. ربنا يخليكي لينا يا ست الكل وما يحرمناش من ضحكتك أبداً 🤍
-    </div>
-</div>
 
-<!-- ================= 3. الجواب التاني (بعد الصور) ================= -->
+        <!-- ================= 3. الجواب التاني (بعد الصور) ================= -->
         <div class="fade-up" style="margin-top: 80px;">
             <div class="section-title" style="font-size: 2.2rem;">Another letter...</div>
             <div class="section-sub">رسالة تانية مخصوص من قلبي 💌</div>
@@ -333,7 +332,8 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
                 </div>
             </div>
         </div>
-        <!-- قسم كروت الخربشة (Scratch Cards) -->
+        
+        <!-- ================= 4. كروت الخربشة (Scratch Cards) ================= -->
         <div class="fade-up" style="margin-top: 80px;">
             <div class="section-title" style="font-size: 2rem;">Things I Love About You</div>
             <div class="section-sub">امسحي المربعات عشان تشوفي المكتوب 👆</div>
@@ -353,7 +353,8 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
                 </div>
             </div>
         </div>
-        <!-- المفاجأة الأخيرة -->
+        
+        <!-- ================= 6. المفاجأة الأخيرة ================= -->
         <div class="fade-up" style="margin-top: 100px; text-align: center;">
             <div class="section-title" style="font-size: 2rem;">One Last Thing...</div>
             <button class="cake-btn fade-up" onclick="showFinal()">دوسي وشوفي المفاجأة 🎂</button>
@@ -375,7 +376,6 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
         function pressKey(num) {
             let errorMsg = document.getElementById('pin-error');
             
-            // إخفاء رسالة الخطأ لو بدأت تكتب من جديد
             if (pinCount === 0) {
                 errorMsg.style.opacity = '0';
             }
@@ -385,7 +385,6 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
                 currentPin += num;
                 document.getElementById('dot-' + pinCount).classList.add('filled');
                 
-                // تشغيل الأغنية من أول ضغطة
                 let audio = document.getElementById('bgMusic');
                 if (audio && audio.paused) {
                     audio.play().catch(e => console.log('Audio init'));
@@ -395,7 +394,6 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
                     if (currentPin === "1982") {
                         setTimeout(unlockSequence, 500);
                     } else {
-                        // لو الباسورد غلط
                         setTimeout(() => {
                             errorMsg.style.opacity = '1';
                             resetKeypad();
@@ -405,7 +403,6 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
             }
         }
 
-        // تفريغ النقط لو الباسورد كان غلط
         function resetKeypad() {
             pinCount = 0;
             currentPin = "";
@@ -462,63 +459,52 @@ canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height
         }
 
         // ================= برمجة كروت الخربشة (Scratch Cards) =================
-function initScratchCards() {
-    const canvases = document.querySelectorAll('.scratch-canvas');
-    canvases.forEach(canvas => {
-        const ctx = canvas.getContext('2d');
-        
-        // كبرنا المقاس هنا لـ 200 عشان يطابق التعديل اللي عملناه فوق
-        canvas.width = 200; 
-        canvas.height = 200;
-        
-        // تلوين الكارت قبل المسح
-        ctx.fillStyle = '#e0acb8';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // الكلمة اللي بتظهر فوق الكارت
-        ctx.font = 'bold 18px Cairo';
-        ctx.fillStyle = '#fff';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('امسحي هنا', canvas.width/2, canvas.height/2);
+        function initScratchCards() {
+            const canvases = document.querySelectorAll('.scratch-canvas');
+            canvases.forEach(canvas => {
+                const ctx = canvas.getContext('2d');
+                
+                canvas.width = 200; 
+                canvas.height = 200;
+                
+                ctx.fillStyle = '#e0acb8';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.font = 'bold 18px Cairo';
+                ctx.fillStyle = '#fff';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('امسحي هنا', canvas.width/2, canvas.height/2);
 
-        let isDrawing = false;
-        
-        function getPos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
-            const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
-            return {x, y};
+                let isDrawing = false;
+                
+                function getPos(e) {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+                    const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+                    return {x, y};
+                }
+
+                function scratch(e) {
+                    if (!isDrawing) return;
+                    e.preventDefault(); 
+                    const pos = getPos(e);
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.beginPath();
+                    ctx.arc(pos.x, pos.y, 20, 0, Math.PI * 2); 
+                    ctx.fill();
+                }
+
+                canvas.addEventListener('mousedown', () => isDrawing = true);
+                canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, {passive: false});
+                
+                window.addEventListener('mouseup', () => isDrawing = false);
+                window.addEventListener('touchend', () => isDrawing = false);
+                
+                canvas.addEventListener('mousemove', scratch);
+                canvas.addEventListener('touchmove', scratch, {passive: false});
+            });
         }
-
-        function scratch(e) {
-            if (!isDrawing) return;
-            e.preventDefault(); 
-            const pos = getPos(e);
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.beginPath();
-            ctx.arc(pos.x, pos.y, 20, 0, Math.PI * 2); // كبرنا مساحة المسح عشان تبقى أسهل
-            ctx.fill();
-        }
-
-        canvas.addEventListener('mousedown', () => isDrawing = true);
-        canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, {passive: false});
-        
-        window.addEventListener('mouseup', () => isDrawing = false);
-        window.addEventListener('touchend', () => isDrawing = false);
-        
-        canvas.addEventListener('mousemove', scratch);
-        canvas.addEventListener('touchmove', scratch, {passive: false});
-    });
-}
-
-
-        // ================= فتح وقفل أي جواب في الموقع =================
-function toggleEnvelope(element) {
-    element.classList.toggle('open');
-}
-
-
 
         // ================= إظهار المفاجأة الأخيرة =================
         function showFinal() {
@@ -531,12 +517,12 @@ function toggleEnvelope(element) {
             }, 100);
         }
 
-        // ================= القلوب المتطايرة =================
+        // ================= القلوب المتطايرة (تم إصلاح الخطأ البرمجي هنا) =================
         function createParticles() {
             setInterval(() => {
                 const heart = document.createElement('div');
                 heart.className = 'particle';
-                heart.innerHTML = '❤️''❤️''❤️''❤️''❤️''❤️';
+                heart.innerHTML = '❤️❤️❤️❤️❤️❤️';
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
                 document.body.appendChild(heart);
